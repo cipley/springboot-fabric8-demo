@@ -15,7 +15,6 @@
   	<properties>
   		<k8s.property.file>k8s.properties</k8s.property.file>
   		<docker.property.file>docker.properties</docker.property.file>
-  		<env.property.file>env-var.properties</env.property.file>
   		
   		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
@@ -64,7 +63,8 @@
 			</plugin>
 			<plugin>
 				<groupId>io.fabric8</groupId>
-				<artifactId>fabric8-maven-plugin</artifactId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.26.1</version>
 				<configuration>
 					<skip>false</skip>
 					<dockerHost>${docker.host}</dockerHost>
@@ -76,6 +76,7 @@
 								<from>${docker.from}</from>
 								<maintainer>${docker.maintainer}</maintainer>
 								<assembly>
+									<basedir>/</basedir>
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>
 								<tags>
@@ -88,7 +89,7 @@
 									<exec>
 										<arg>java</arg>
 										<arg>-jar</arg>
-										<arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
+										<arg>${project.artifactId}-${project.version}.${project.packaging}</arg>
 									</exec>
 								</entryPoint>
 							</build>
@@ -97,7 +98,6 @@
 								<ports>
 									<port>8080</port>
 								</ports>
-								<envPropertyFile>${basedir}/src/main/resources/docker/${env.property.file}</envPropertyFile>
 							</run>
 						</image>
 					</images>
@@ -105,5 +105,4 @@
 			</plugin>
 		</plugins>	
 	</build>
-  
 </project>

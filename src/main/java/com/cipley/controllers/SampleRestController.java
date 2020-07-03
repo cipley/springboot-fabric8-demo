@@ -15,4 +15,16 @@ public class SampleRestController {
 	public ResponseEntity<String> helloWorld(){
 		return ResponseEntity.ok("Hello World!");
 	}
+	
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping("/hello-world-2")
+	public ResponseEntity<String> helloWorld2(){
+		return ResponseEntity.ok("Hello World 2!");
+	}
+	
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping("/hello-world-3")
+	public ResponseEntity<String> helloWorld3(){
+		return ResponseEntity.ok("Hello World 3!");
+	}
 }
